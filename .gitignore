@@ -1,4 +1,4 @@
-*.pyx
+*.pyc
 *~
 .idea/
 *.sqlite3
