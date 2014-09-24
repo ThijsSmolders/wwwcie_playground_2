@@ -6,6 +6,11 @@
 </head>
 <body>
 <h1>WELKOM G's</h1>
+<form method="POST" action="."> {{ form.as_p }}
+<input type="submit" value="Plaats MSN-bericht, want die is veel beter dan een IRC-memo" />
+{% csrf_token %}
+</form>
+
 {% for msg in all_msg %}
     <p><strong> {{ msg.user.get_full_name }}: </strong> {{ msg.msg }} </p>
     {% endfor%}
