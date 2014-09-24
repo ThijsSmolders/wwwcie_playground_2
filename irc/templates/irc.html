@@ -6,5 +6,11 @@
 </head>
 <body bgcolor="#DF01D7">
 <p><strong>Thijs:</strong> IRC is beter dan MSN</p>
+<p> {% for Memo in allmemos %}
+<br>
+    <strong>{{ Memo.guest }}:</strong> {{ Memo.memo }}
+</br>
+    {% endfor %}
+</p>
 </body>
 </html>

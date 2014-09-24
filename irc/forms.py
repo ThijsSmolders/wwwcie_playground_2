@@ -1,0 +1,3 @@
+
+
+class MemoForm(ModerForm)
