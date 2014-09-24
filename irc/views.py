@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
 def irc(request):
-    pass
+    return render(request,'irc.html')
 
 # Create your views here.
