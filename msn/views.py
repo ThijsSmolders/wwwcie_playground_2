@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def msn_chat(request):
+    pass
