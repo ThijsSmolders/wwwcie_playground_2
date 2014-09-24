@@ -1,3 +1,5 @@
 *.pyx
 *~
 .idea/
+*.sqlite3
+
