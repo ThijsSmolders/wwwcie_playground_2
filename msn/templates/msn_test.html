@@ -6,7 +6,9 @@
 </head>
 <body>
 <h1>WELKOM G's</h1>
-<p>Thijs: Welkom allemaal, vriendjes en vriendinnetjes, we komen er weer aan, in Peters moeder!</p>
+{% for msg in all_msg %}
+    <p><strong> {{ msg.user.get_full_name }}: </strong> {{ msg.msg }} </p>
+    {% endfor%}
 <p><strong>Rudo</strong>: Welkom allemaal, vriendjes en vriendinnetjes, we komen er weer aan, in Peters moeder!</p>
 </body>
 </html>
