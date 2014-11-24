@@ -2,11 +2,9 @@
 
 <p>In deze spellen kan je meedoen:</p>
 
-{{games}}
-
 <ul>
 	{% for game in games %}
-		<li>{{ game.name }}</li>
+		<li><a href="{% url 'wakkerdam_game' %}?id={{game.id}}"> {{game.name}} </a></li>
 	{% empty %}
 		<li>Helaas geen spellen op dit moment!</li>
 	{% endfor %}

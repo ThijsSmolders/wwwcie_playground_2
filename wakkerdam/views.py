@@ -46,10 +46,12 @@ def make_game_submit(request):
 def show_game(request):
 	try:
 		id = int(request.GET['id'])
-		game = Game.objects.filter(id = id)
+		game = Game.objects.get(id = id)
 	except (KeyError, ValueError, Game.DoesNotExist), e: # if no id or not a valid id or no such game
 		return redirect(to = '%s' % reverse('wakkerdam_game_not_found'))
-	# todo!
+	return render(request, 'show_game.html', {
+		'game': game,
+	})
 
 
 def game_not_found(request):
