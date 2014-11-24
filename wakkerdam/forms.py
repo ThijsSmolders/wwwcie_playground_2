@@ -14,5 +14,8 @@ class CreateGameForm(ModelForm):
 		""" We only want the name field to be changed """
 		fields = ['name',]
 
+class JoinPlayerForm(ModelForm):
 
-
+	class Meta:
+		model = Player
+		fields = ['name',]
