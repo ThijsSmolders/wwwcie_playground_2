@@ -4,3 +4,9 @@
        {{ game.name }}
        {{ game.state }}
        {{ game.started }}
+
+<form action="{% url 'wakkerdam_join_game' %}" method="GET">
+	{{ form.as_p }}
+	{% csrf_token %} {# this should be in every POST form for security reasons #}
+	<input type="submit" value="join!" />
+</form>
