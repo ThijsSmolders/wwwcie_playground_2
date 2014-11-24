@@ -29,15 +29,21 @@ def make_game(request):
 		'form': form,
 	})
 
-
+@require_POST
 def join_game(request):
 	"""
 		Show the empty form to the user who is starting a game.
 	"""
-	form = JoinPlayerForm(data = None)
-	return render(request, 'join_game.html', {
-		'form': form,
-	})
+	try:
+		id = int(request.GET['id'])
+		game = Game.objects.get(id = id)
+	except (KeyError, ValueError, Game.DoesNotExist), e: # if no id or not a valid id or no such game
+		return redirect(to = '%s' % reverse('wakkerdam_game_not_found'))
+	form = JoinPlayerForm(data = request.POST)
+	if form.is_valid():
+		player = form.instance
+		player.game=game
+		player.save()
 
 @require_POST # only send completed forms here
 def make_game_submit(request):

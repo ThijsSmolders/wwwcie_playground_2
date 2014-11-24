@@ -24,7 +24,7 @@ class Player(models.Model):
 	role = models.CharField(max_length = 10, choices = (
 		('civilian', 'Ordinary citizen'),
 		('werewolf', 'Hungry mothafucker'),
-	), blank = True, default = None)
+	), blank = True, null=True, default = None)
 	game = models.ForeignKey(Game, related_name='players')
 	def __unicode__(self):
 		return self.name
