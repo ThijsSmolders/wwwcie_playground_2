@@ -1,6 +1,6 @@
 
 from django.forms import ModelForm
-from wakkerdam.models import Game
+from wakkerdam.models import Game, Player
 
 
 class CreateGameForm(ModelForm):
