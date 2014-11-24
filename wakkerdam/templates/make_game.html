@@ -1,0 +1,13 @@
+
+
+<p>Maak hier je spel:</p>
+
+<form action="{% url 'wakkerdam_make_game_submit' %}" method="POST">
+	{{ form.as_p }}
+	{% csrf_token %} {# this should be in every POST form for security reasons #}
+	<input type="submit" value="maak!" />
+</form>
+
+<p>Laat maar, <a href="{% url 'wakkerdam_games_all' %}">terug naar het overzicht</a> graag!</p>
+
+

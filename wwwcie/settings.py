@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'irc',
     'msn',
+    'wakkerdam',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -1,0 +1,13 @@
+
+
+<p>In deze spellen kan je meedoen:</p>
+
+<ul>
+	{% for game in games %}
+		<li>{{ game.name }}</li>
+	{% empty %}
+		<li>Helaas geen spellen op dit moment!</li>
+	{% endfor %}
+</ul>
+
+<p><a href="{% url 'wakkerdam_make_game' %}">Maak een spel!</a></p>
