@@ -15,5 +15,7 @@ class Game(models.Model):
 		('over', 'The game has been completed!'),
 	), default = 'join')
 	started = models.DateTimeField(auto_now_add = True)
+	def __unicode__(self):
+		return self.name
 
 
