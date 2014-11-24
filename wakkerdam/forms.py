@@ -15,3 +15,4 @@ class CreateGameForm(ModelForm):
 		fields = ['name',]
 
 
+
