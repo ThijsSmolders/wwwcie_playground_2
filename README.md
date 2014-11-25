@@ -1,6 +1,6 @@
 wwwcie_playground_2
 ===================
 
-Eerste_test
+Oefenproject! Nu met spelletje! (wordt aan gewerkt iig...)
 
-Wie dit leest is gek
+
