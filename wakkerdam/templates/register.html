@@ -1,0 +1,16 @@
+
+{% extends 'layout.html' %}
+
+{% block content %}
+	<h1>Maak een account</h1>
+
+	<form action="{% url 'wakkerdam_register_submit' %}" method="POST">
+		{{ form.as_p }}
+		{% csrf_token %}
+		<input type="submit" value="maak account" />
+	</form>
+
+	<p>Als je al een account hebt kan je <a href="{% url 'wakkerdam_login' %}">hier inloggen</a>.</p>
+{% endblock content %}
+
+

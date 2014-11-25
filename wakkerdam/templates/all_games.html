@@ -1,13 +1,22 @@
 
+{# the next line means that this template will be an extension to layout.html #}
+{# that means it will be layout.html but with any block tags defined here replacing the originals #}
+{% extends 'layout.html' %}
 
-<p>In deze spellen kan je meedoen:</p>
+{% block content %}
+	<h1>Alle spellen</h1>
 
-<ul>
-	{% for game in games %}
-		<li><a href="{% url 'wakkerdam_game' %}?id={{game.id}}"> {{game.name}} </a></li>
-	{% empty %}
-		<li>Helaas geen spellen op dit moment!</li>
-	{% endfor %}
-</ul>
+	<p>In deze spellen kan je meedoen:</p>
 
-<p><a href="{% url 'wakkerdam_make_game' %}">Maak een spel!</a></p>
+	<ul>
+		{% for game in games %}
+			<li><a href="{% url 'wakkerdam_game' %}?id={{game.id}}"> {{game.name}} </a></li>
+		{% empty %}
+			<li>Helaas geen spellen op dit moment!</li>
+		{% endfor %}
+	</ul>
+
+	<p><a href="{% url 'wakkerdam_make_game' %}">Maak een spel!</a></p>
+{% endblock content %}
+
+

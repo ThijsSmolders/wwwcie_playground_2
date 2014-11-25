@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.conf import settings as defaults
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -23,6 +24,11 @@ SECRET_KEY = '+81)jvm(q3o42(dxc%=zvzs7=tl@%g0c2$0t9tme*(0j-o8ic&'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
+
+
+TEMPLATE_CONTEXT_PROCESSORS = defaults.TEMPLATE_CONTEXT_PROCESSORS + (
+	'django.core.context_processors.request',
+)
 
 ALLOWED_HOSTS = []
 
@@ -84,3 +90,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'auth.User'
+
+

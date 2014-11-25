@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>{% block title %}Wakkerdam!{% endblock title %}</title>
+	<style rel="stylesheet" type="text/css">
+		#menu
+		{
+			background-color: gray;
+			margin: 1em;
+			border-bottom: 1px solid gray;
+			padding: 0;
+		}
+
+		#menu li
+		{
+			display: inline;
+			list-style-type: none;
+			padding: 0 2em 0 0;
+		}
+
+		#menu, #page
+		{
+			max-width: 600px;
+			margin: 0px auto;
+			background-color: white;
+		}
+
+		#page
+		{
+			padding: 1em 2em;
+			min-height: 500px;
+		}
+
+		body
+		{
+			background: url(http://php.markv.nl/random/threewolvesmoon.jpg) no-repeat center center fixed;
+			background-size: cover;
+		}
+	</style>
+</head>
+<body>
+	<div id="page">
+		<ul id="menu">
+			<li><a href="{% url 'wakkerdam_games_all' %}">home</a></li>
+			<li><a href="{% url 'wakkerdam_info' %}">info</a></li>
+			{% if request.user.is_authenticated %}
+				<li><em>Hello {{ request.user }}</em></li>
+				<li><a href="{% url 'wakkerdam_logout' %}">logout</a></li>
+				{% if request.user.is_staff %}
+					<li><a href="/admin/">admin</a></li>
+				{% endif %}
+			{% else %}
+				<li><a href="{% url 'wakkerdam_login' %}">login</a></li>
+				<li><a href="{% url 'wakkerdam_register' %}">register</a></li>
+			{% endif %}
+			{# all the games the player is in should be in the menu #}
+		</ul>
+		{% block content %}
+			<p>No content on this page! But other templates (html files) will overwrite this, so you should never see it!</p>
+		{% endblock content %}
+	</div>
+</body>
+</html>
+
+

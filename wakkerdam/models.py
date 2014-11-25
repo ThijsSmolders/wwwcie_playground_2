@@ -1,4 +1,5 @@
 
+from wwwcie.settings import AUTH_USER_MODEL
 from django.db import models
 
 
@@ -26,6 +27,11 @@ class Player(models.Model):
 		('werewolf', 'Hungry mothafucker'),
 	), blank = True, null=True, default = None)
 	game = models.ForeignKey(Game, related_name='players')
+	""" User is the actual person, it's a standard Django model """
+	""" Player is the civilian within a game session (new player for each game) """
+	""" These need to be linked, so that users can only make their own moves """
+	user = models.ForeignKey(AUTH_USER_MODEL)
+
 	def __unicode__(self):
 		return self.name
 

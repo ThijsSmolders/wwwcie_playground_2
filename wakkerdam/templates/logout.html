@@ -1,0 +1,13 @@
+
+{% extends 'layout.html' %}
+
+{% block content %}
+	<h1>Logout</h1>
+
+	<form action="{% url 'wakkerdam_logout_submit' %}" method="POST">
+		{% csrf_token %}
+		<input type="submit" value="logout" />
+	</form>
+{% endblock content %}
+
+

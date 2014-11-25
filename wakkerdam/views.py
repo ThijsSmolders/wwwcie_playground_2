@@ -1,4 +1,4 @@
-
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -29,7 +29,9 @@ def make_game(request):
 		'form': form,
 	})
 
+
 @require_POST
+@login_required
 def join_game(request):
 	"""
 		Show the empty form to the user who is starting a game.
@@ -42,8 +44,16 @@ def join_game(request):
 	form = JoinPlayerForm(data = request.POST)
 	if form.is_valid():
 		player = form.instance
-		player.game=game
+		""" Make sure a player can't join twice """
+		for player in game.players:
+			if player.user.pk == request.user.pk:
+				return HttpResponse('You have already joined')
+		player.game = game
+		player.user = request.user
 		player.save()
+	""" send the player back to the game overview: """
+	return redirect(to = '%s?id=%d' % (reverse('wakkerdam_game'), game.id))
+
 
 @require_POST # only send completed forms here
 def make_game_submit(request):
@@ -74,5 +84,9 @@ def show_game(request):
 
 def game_not_found(request):
 	return render(request, 'game_not_found.html')
+
+
+def info(request):
+	return render(request, 'info.html')
 
 
