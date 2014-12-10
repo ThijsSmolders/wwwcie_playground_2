@@ -10,7 +10,7 @@
 
 	<ul>
 		{% for game in games %}
-			<li><a href="{% url 'wakkerdam_game' %}?id={{game.id}}"> {{game.name}} </a></li>
+			<li><a href="{% url 'wakkerdam_game' %}?id={{game.id}}"> {{game.name}} {{game.players.all.count}}  </a></li>
 		{% empty %}
 			<li>Helaas geen spellen op dit moment!</li>
 		{% endfor %}

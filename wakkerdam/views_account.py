@@ -15,7 +15,7 @@ from django.views.decorators.http import require_POST
 def login(request):
 	if request.user.is_authenticated():
 		""" This shows a simple text """
-		return HttpResponse('You are already logged in!')
+		return HttpResponse('You are already logged in, you may die!')
 	""" AuthenticationForm is a standard Django login form (lazy) """
 	form = AuthenticationForm(request = request, data = None)
 	return render(request, 'login.html', {

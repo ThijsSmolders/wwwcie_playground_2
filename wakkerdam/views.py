@@ -45,9 +45,12 @@ def join_game(request):
 	if form.is_valid():
 		player = form.instance
 		""" Make sure a player can't join twice """
-		for player in game.players:
-			if player.user.pk == request.user.pk:
-				return HttpResponse('You have already joined')
+		for player_loop in game.players.all():
+			if player_loop.user.pk == request.user.pk:
+				return HttpResponse('You have already joined asshole')
+			if player_loop.name == player.name:
+				return HttpResponse('Sorry, too late, this name has already been taken! KUT')
+
 		player.game = game
 		player.user = request.user
 		player.save()
