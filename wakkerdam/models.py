@@ -16,6 +16,7 @@ class Game(models.Model):
 		('over', 'The game has been completed!'),
 	), default = 'join')
 	started = models.DateTimeField(auto_now_add = True)
+	initiator = models.ForeignKey(AUTH_USER_MODEL)
 	def __unicode__(self):
 		return self.name
 
@@ -27,6 +28,7 @@ class Player(models.Model):
 		('werewolf', 'Hungry mothafucker'),
 	), blank = True, null=True, default = None)
 	game = models.ForeignKey(Game, related_name='players')
+	alive = models.BooleanField(default = True)
 	""" User is the actual person, it's a standard Django model """
 	""" Player is the civilian within a game session (new player for each game) """
 	""" These need to be linked, so that users can only make their own moves """
