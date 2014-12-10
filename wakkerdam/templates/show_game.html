@@ -6,7 +6,7 @@
         <p>Game State: <b>{{ game.state }}</b></p>
         <p>Started: {{ game.started }}</p>
         <p>Players:
-        {% for player in game.players %}
+        {% for player in game.players.all %}
             {{ player.name }}
         {% endfor %}</p>
         <p>Aantal spelers: {{ game.players.count }}</p>
