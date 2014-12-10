@@ -27,7 +27,7 @@ class Player(models.Model):
 		('civilian', 'Ordinary citizen'),
 		('werewolf', 'Hungry mothafucker'),
 	), blank = True, null=True, default = None)
-	game = models.ForeignKey(Game, related_name='players')
+	game = models.ForeignKey(Game, related_name = 'players')
 	alive = models.BooleanField(default = True)
 	""" User is the actual person, it's a standard Django model """
 	""" Player is the civilian within a game session (new player for each game) """

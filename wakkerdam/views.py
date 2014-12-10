@@ -20,6 +20,7 @@ def all_games(request):
 
 
 @require_GET # only for showing empty forms
+@login_required
 def make_game(request):
 	"""
 		Show the empty form to the user who is starting a game.
@@ -75,6 +76,9 @@ def make_game_submit(request):
 		game.players.add(player)
 	return redirect(to = '%s?id=%d' % (reverse('wakkerdam_game'), game.id))
 
+
+@require_POST
+@login_required
 def start_game(request):
 	try:
 		id = int(request.GET['id'])
@@ -97,9 +101,8 @@ def leave_game(request):
 		game = Game.objects.get(id = id)
 	except (KeyError, ValueError, Game.DoesNotExist), e: # if no id or not a valid id or no such game
 		return redirect(to = '%s' % reverse('wakkerdam_game_not_found'))
-	currentplayers = Player.objects.get(game=game, user=request.user)
-	game.players.remove(currentplayers)
-	return render(request, 'start_game.html')
+	game.players.filter(game=game, user=request.user).delete()
+	return redirect(to = '%s?id=%d' % (reverse('wakkerdam_game'), game.id))
 
 
 def show_game(request):
