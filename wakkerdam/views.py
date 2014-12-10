@@ -50,7 +50,6 @@ def join_game(request):
 				return HttpResponse('You have already joined asshole')
 			if player_loop.name == player.name:
 				return HttpResponse('Sorry, too late, this name has already been taken! KUT')
-
 		player.game = game
 		player.user = request.user
 		player.save()
