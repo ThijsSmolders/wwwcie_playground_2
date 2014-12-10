@@ -20,6 +20,7 @@ def all_games(request):
 
 
 @require_GET # only for showing empty forms
+@login_required
 def make_game(request):
 	"""
 		Show the empty form to the user who is starting a game.
@@ -75,6 +76,9 @@ def make_game_submit(request):
 		game.players.add(player)
 	return redirect(to = '%s?id=%d' % (reverse('wakkerdam_game'), game.id))
 
+
+@require_POST
+@login_required
 def start_game(request):
 	return render(request, 'start_game.html')
 
