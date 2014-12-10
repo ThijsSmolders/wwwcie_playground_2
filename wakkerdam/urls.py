@@ -2,7 +2,6 @@
 from django.conf.urls import patterns, url
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from wakkerdam.views_account import login, login_submit, logout, logout_submit, register, register_submit
 from wakkerdam.views import all_games, make_game, make_game_submit, show_game, game_not_found, join_game, info
 
 
@@ -15,12 +14,6 @@ urlpatterns = patterns('',
 	url(r'game_not_found/$', game_not_found, name = 'wakkerdam_game_not_found'),
 	url(r'join_game/$', join_game, name = 'wakkerdam_join_game'),
 	url(r'info/$', info, name = 'wakkerdam_info'),
-	url(r'account/login/$', login, name = 'wakkerdam_login'),
-	url(r'account/login/submit$', login_submit, name = 'wakkerdam_login_submit'),
-	url(r'account/logout/$', logout, name = 'wakkerdam_logout'),
-	url(r'account/logout/submit/$', logout_submit, name = 'wakkerdam_logout_submit'),
-	url(r'account/register/$', register, name = 'wakkerdam_register'),
-	url(r'account/register/submit/$', register_submit, name = 'wakkerdam_register_submit'),
 )
 
 
