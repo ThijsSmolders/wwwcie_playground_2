@@ -3,7 +3,7 @@ from django.conf.urls import patterns, url
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from wakkerdam.views import all_games, make_game, make_game_submit, show_game, game_not_found, join_game, info, \
-	start_game
+	start_game, leave_game
 
 
 urlpatterns = patterns('',
@@ -16,6 +16,7 @@ urlpatterns = patterns('',
 	url(r'join_game/$', join_game, name = 'wakkerdam_join_game'),
 	url(r'info/$', info, name = 'wakkerdam_info'),
 	url(r'start_game/$', start_game, name = 'wakkerdam_start_game'),
+	url(r'leave_game/$', leave_game, name = 'wakkerdam_leave_game'),
 
 )
 
