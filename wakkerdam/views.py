@@ -91,9 +91,8 @@ def leave_game(request):
 		game = Game.objects.get(id = id)
 	except (KeyError, ValueError, Game.DoesNotExist), e: # if no id or not a valid id or no such game
 		return redirect(to = '%s' % reverse('wakkerdam_game_not_found'))
-	currentplayers = Player.objects.get(game=game, user=request.user)
-	game.players.remove(currentplayers)
-	return render(request, 'start_game.html')
+	game.players.filter(game=game, user=request.user).delete()
+	return redirect(to = '%s?id=%d' % (reverse('wakkerdam_game'), game.id))
 
 
 def show_game(request):
