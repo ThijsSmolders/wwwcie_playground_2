@@ -57,6 +57,8 @@ MIDDLEWARE_CLASSES = (
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+MINIMUM_STARTING_PLAYERS = 1
+
 ROOT_URLCONF = 'wwwcie.urls'
 
 WSGI_APPLICATION = 'wwwcie.wsgi.application'

@@ -1,4 +1,4 @@
-
+from math import ceil
 
 def distribute_roles(game):
 	"""
@@ -7,4 +7,6 @@ def distribute_roles(game):
 	game.state = 'join'
 	# todo!
 
+def number_of_wolves(n):
+	return ceil(n/7)
 

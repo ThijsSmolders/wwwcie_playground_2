@@ -3,10 +3,12 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST, require_GET
-from wakkerdam.forms import CreateGameForm
-from wakkerdam.functions import distribute_roles
+from wakkerdam.forms import CreateGameForm, NumberOfWolvesForm
+from wakkerdam.functions import distribute_roles, number_of_wolves
 from wakkerdam.models import Game, Player
 from wakkerdam.forms import JoinPlayerForm
+from wwwcie.settings import MINIMUM_STARTING_PLAYERS
+from random import sample
 
 
 def all_games(request):
@@ -87,10 +89,15 @@ def start_game(request):
 		return redirect(to = '%s' % reverse('wakkerdam_game_not_found'))
 	if request.user==game.initiator:
 		game.state='start'
-		return render(request, 'start_game.html')
+		game.save()
+		form = NumberOfWolvesForm(data = None, initial={'nr':number_of_wolves(game.players.all().count())})
+		return render(request, 'start_game.html', {
+		'form': form,
+		'game': game,
+		})
+
 	else:
 		return redirect(to = '%s?id=%d' % (reverse('wakkerdam_game'), game.id))
-
 
 
 @require_POST
@@ -121,11 +128,30 @@ def show_game(request):
 		'game': game,
 		'form': form,
 		'currentplayer':currentplayer,
+		'minimum_players':MINIMUM_STARTING_PLAYERS,
 	})
 
 
 def game_not_found(request):
 	return render(request, 'game_not_found.html')
+
+def start_phase_two(request):
+	try:
+		id = int(request.GET['id'])
+		game = Game.objects.get(id = id)
+	except (KeyError, ValueError, Game.DoesNotExist), e: # if no id or not a valid id or no such game
+		return redirect(to = '%s' % reverse('wakkerdam_game_not_found'))
+	form = NumberOfWolvesForm(data = request.POST)
+	if form.is_valid():
+		if 0 < form.cleaned_data['nr'] < game.players.all().count():
+			wolves = sample(game.players.all(), form.cleaned_data['nr'])
+			for wolf in wolves:
+				wolf.state = 'werewolf'
+				wolf.save()
+			game.state = 'night'
+			game.save()
+			return redirect(to = '%s?id=%d' % (reverse('wakkerdam_night'), game.id))
+	return HttpResponse('Je bent een sukkeltje, volgende keer beter. Peters moeder troost je wel!')
 
 
 def info(request):

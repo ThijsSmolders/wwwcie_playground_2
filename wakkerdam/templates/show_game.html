@@ -39,12 +39,20 @@
 {% endif %}
 {% endfor %}
 
-{% if request.user == game.initiator %}
+{% if game.players.all.count >= minimum_players %}
+    {% if request.user == game.initiator %}
 
-<form action="{% url 'wakkerdam_start_game' %}?id={{game.id}}" method="POST">
-	{% csrf_token %} {# this should be in every POST form for security reasons #}
-	<input type="submit" value="Start!" />
-</form>
+
+    <form action="{% url 'wakkerdam_start_game' %}?id={{game.id}}" method="POST">
+	    {% csrf_token %} {# this should be in every POST form for security reasons #}
+	    <input type="submit" value="Start!" />
+    </form>
+
+    {% endif %}
+
+{% else %}
+
+<p> Nog niet genoeg spelers om te starten! </p>
 
 {% endif %}
 

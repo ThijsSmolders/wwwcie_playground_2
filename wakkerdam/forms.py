@@ -1,5 +1,5 @@
-
-from django.forms import ModelForm
+from django import forms
+from django.forms import ModelForm, Form
 from wakkerdam.models import Game, Player
 
 
@@ -19,3 +19,6 @@ class JoinPlayerForm(ModelForm):
 	class Meta:
 		model = Player
 		fields = ['name',]
+
+class NumberOfWolvesForm(Form):
+	nr = forms.IntegerField()
