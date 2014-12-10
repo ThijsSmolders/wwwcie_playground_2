@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST, require_GET
 from wakkerdam.forms import CreateGameForm
 from wakkerdam.functions import distribute_roles
-from wakkerdam.models import Game
+from wakkerdam.models import Game, Player
 from wakkerdam.forms import JoinPlayerForm
 
 
@@ -58,6 +58,7 @@ def join_game(request):
 
 
 @require_POST # only send completed forms here
+@login_required
 def make_game_submit(request):
 	"""
 		Start a new game that people can join, using the provided form data.
@@ -66,9 +67,18 @@ def make_game_submit(request):
 	if form.is_valid():
 		""" save the new Game if it's valid """
 		game = form.instance
-		distribute_roles(game)
-		form.save()
+		game.initiator = request.user
+		game=form.save()
+		player=Player(name='Master',game=game, user=request.user)
+#		distribute_roles(game)
+		player.save()
+		game.players.add(player)
 	return redirect(to = '%s?id=%d' % (reverse('wakkerdam_game'), game.id))
+
+def start_game(request):
+	return render(request, 'start_game.html')
+
+
 
 
 def show_game(request):
