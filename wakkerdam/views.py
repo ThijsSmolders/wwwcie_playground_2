@@ -76,7 +76,17 @@ def make_game_submit(request):
 	return redirect(to = '%s?id=%d' % (reverse('wakkerdam_game'), game.id))
 
 def start_game(request):
-	return render(request, 'start_game.html')
+	try:
+		id = int(request.GET['id'])
+		game = Game.objects.get(id = id)
+	except (KeyError, ValueError, Game.DoesNotExist), e: # if no id or not a valid id or no such game
+		return redirect(to = '%s' % reverse('wakkerdam_game_not_found'))
+	if request.user==game.initiator:
+		game.state='start'
+		return render(request, 'start_game.html')
+	else:
+		return redirect(to = '%s?id=%d' % (reverse('wakkerdam_game'), game.id))
+
 
 
 

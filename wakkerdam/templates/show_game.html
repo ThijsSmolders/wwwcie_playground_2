@@ -24,11 +24,13 @@
 {% endif %}
 {% endfor %}
 
-
+{% if player.pk == currentplayer.pk %}
 
 <form action="{% url 'wakkerdam_start_game' %}?id={{game.id}}" method="POST">
 	{% csrf_token %} {# this should be in every POST form for security reasons #}
 	<input type="submit" value="Start!" />
 </form>
+
+{% endif %}
 
 {% endblock content %}
