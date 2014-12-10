@@ -11,10 +11,14 @@
         {% endfor %}</p>
         <p>Aantal spelers: {{ game.players.count }}</p>
 
-<form action="{% url 'wakkerdam_join_game' %}?id={{game.id}}" method="POST">
-	{{ form.as_p }}
-	{% csrf_token %} {# this should be in every POST form for security reasons #}
-	<input type="submit" value="join!" />
-</form>
+		{% if request.user.is_authenticated %}
+		<form action="{% url 'wakkerdam_join_game' %}?id={{game.id}}" method="POST">
+			{{ form.as_p }}
+			{% csrf_token %} {# this should be in every POST form for security reasons #}
+			<input type="submit" value="join!" />
+		</form>
+		{% else %}
+			<p><a href="{% url 'wakkerdam_login' %}">Login</a> to join</p>
+		{% endif %}
 
 {% endblock content %}
