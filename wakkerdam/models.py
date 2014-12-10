@@ -32,6 +32,9 @@ class Player(models.Model):
 	""" These need to be linked, so that users can only make their own moves """
 	user = models.ForeignKey(AUTH_USER_MODEL)
 
+	class Meta:
+		unique_together = ('game', 'user')
+
 	def __unicode__(self):
 		return self.name
 

@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST, require_GET
 from wakkerdam.forms import CreateGameForm
 from wakkerdam.functions import distribute_roles
-from wakkerdam.models import Game
+from wakkerdam.models import Game, Player
 from wakkerdam.forms import JoinPlayerForm
 
 
@@ -78,9 +78,15 @@ def show_game(request):
 	except (KeyError, ValueError, Game.DoesNotExist), e: # if no id or not a valid id or no such game
 		return redirect(to = '%s' % reverse('wakkerdam_game_not_found'))
 	form = JoinPlayerForm(data = None)
+	currentplayer = None
+	if request.user.is_authenticated():
+		currentplayers = Player.objects.filter(game=game,user=request.user)
+		if currentplayers:
+			currentplayer = currentplayers[0]
 	return render(request, 'show_game.html', {
 		'game': game,
 		'form': form,
+		'currentplayer':currentplayer,
 	})
 
 
