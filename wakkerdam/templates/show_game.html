@@ -21,10 +21,15 @@
 {% for player in game.players.all %}
       {% if player.pk == currentplayer.pk %}
         <p>You are playing as: {{ currentplayer }}</p>
+<form action="{% url 'wakkerdam_leave_game' %}?id={{game.id}}" method="POST">
+{% csrf_token %} {# this should be in every POST form for security reasons #}
+<input type="submit" value="Leave!" />
+</form>
+
 {% endif %}
 {% endfor %}
 
-{% if player.pk == currentplayer.pk %}
+{% if request.user == game.initiator %}
 
 <form action="{% url 'wakkerdam_start_game' %}?id={{game.id}}" method="POST">
 	{% csrf_token %} {# this should be in every POST form for security reasons #}

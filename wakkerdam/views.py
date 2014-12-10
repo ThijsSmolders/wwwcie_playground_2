@@ -89,6 +89,17 @@ def start_game(request):
 
 
 
+@require_POST
+@login_required
+def leave_game(request):
+	try:
+		id = int(request.GET['id'])
+		game = Game.objects.get(id = id)
+	except (KeyError, ValueError, Game.DoesNotExist), e: # if no id or not a valid id or no such game
+		return redirect(to = '%s' % reverse('wakkerdam_game_not_found'))
+	currentplayers = Player.objects.get(game=game, user=request.user)
+	game.players.remove(currentplayers)
+	return render(request, 'start_game.html')
 
 
 def show_game(request):
