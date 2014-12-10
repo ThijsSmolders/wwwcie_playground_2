@@ -1,8 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
         <h1>{{game.name}}</h1>
         <p>Game State: <b>{{ game.state }}</b></p>
         <p>Started: {{ game.started }}</p>
         <p>Players:
-        {% for player in game.players.all %}
+        {% for player in game.players %}
             {{ player.name }}
         {% endfor %}</p>
         <p>Aantal spelers: {{ game.players.count }}</p>
@@ -12,3 +16,5 @@
 	{% csrf_token %} {# this should be in every POST form for security reasons #}
 	<input type="submit" value="join!" />
 </form>
+
+{% endblock content %}
