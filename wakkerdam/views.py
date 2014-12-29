@@ -146,7 +146,7 @@ def start_phase_two(request):
 		if 0 < form.cleaned_data['nr'] < game.players.all().count():
 			wolves = sample(game.players.all(), form.cleaned_data['nr'])
 			for wolf in wolves:
-				wolf.state = 'werewolf'
+				wolf.state = Player.WOLF
 				wolf.save()
 			game.state = 'night'
 			game.save()

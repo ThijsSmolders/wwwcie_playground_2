@@ -22,11 +22,13 @@ class Game(models.Model):
 
 
 class Player(models.Model):
+	CIV = 'civilian'
+	WOLF = 'werewolf'
 	name = models.CharField(max_length=32)
 	role = models.CharField(max_length = 10, choices = (
-		('civilian', 'Ordinary citizen'),
-		('werewolf', 'Hungry mothafucker'),
-	), blank = True, null=True, default = None)
+		(CIV, 'Ordinary citizen'),
+		(WOLF, 'Hungry mothafucker'),
+	), blank = True, null = True, default = CIV)
 	game = models.ForeignKey(Game, related_name = 'players')
 	alive = models.BooleanField(default = True)
 	""" User is the actual person, it's a standard Django model """
