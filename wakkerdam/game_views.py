@@ -2,7 +2,7 @@ from django.shortcuts import render
 from audioop import reverse
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from forms import VotingFormDay
+from forms import VotingFormDay, VotingFormWolves
 from models import Game, Player
 
 
@@ -44,9 +44,18 @@ def play_night(request):
 		player = Player.objects.filter(game = game, role = Player.WOLF, user = request.user)
 		if len(player) == 1
 			if player[0].alive:
-
+				form = VotingFormWolves(data = request.POST)
+				return render(request, 'play_night.html', {
+			'form': form,
+			'game': game,
+		})
+		if form.is_valid():
+			game.state = 'day'
+			game.save()
 			else:
 				return HttpResponse('Noob, je bent dood.')
 		else:
 			return HttpResponse('Je mag niet stemmen deze nacht. Alleen de coole wolven zijn uitgenodigd.')
+
+
 

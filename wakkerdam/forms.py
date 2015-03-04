@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm, Form
-from wakkerdam.models import Game, Player
+from wakkerdam.models import Game, Player, WolfVote
 from models import LynchVote
 
 
@@ -30,3 +30,10 @@ class VotingFormDay(ModelForm):
 		model = LynchVote
 		""" We only want the name field to be changed """
 		fields = ['votee',]
+
+class VotingFormWolves(ModelForm):
+	class Meta:
+		""" We want this form to change a Game """
+		model = WolfVote
+		""" We only want the name field to be changed """
+		fields = ['wolfvotee',]
