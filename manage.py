@@ -2,6 +2,8 @@
 import os
 import sys
 
+print 'Olifant'
+
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wwwcie.settings")
 

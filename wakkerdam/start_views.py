@@ -144,7 +144,14 @@ def start_phase_two(request):
 	form = NumberOfWolvesForm(data = request.POST)
 	if form.is_valid():
 		if 0 < form.cleaned_data['nr'] < game.players.all().count():
+			players = Player.objects.filter(game = game)
+			print 'Players:'
+			for player in players:
+				player.role = Player.CIV
+				player.save()
+				print player
 			wolves = sample(game.players.all(), form.cleaned_data['nr'])
+			print 'Wolves:'
 			for wolf in wolves:
 				wolf.role = Player.WOLF
 				wolf.save()
@@ -152,7 +159,7 @@ def start_phase_two(request):
 			game.state = 'night'
 			game.save()
 			return redirect(to = '%s?id=%d' % (reverse('wakkerdam_night'), game.id))
-	return HttpResponse('Je bent een sukkeltje, volgende keer beter. Peters moeder troost je wel! (Het aantal wolven is niet acceptabel icm het aantal spelers %s.)' %game.players.all().count())
+	return HttpResponse('Je bent een sukkeltje, volgende keer beter. Peters moeder troost je wel (tenzij je Thijs bent)! (Het aantal wolven is niet acceptabel icm het aantal spelers %s.)' %game.players.all().count())
 
 
 def info(request):

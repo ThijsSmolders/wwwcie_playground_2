@@ -2,7 +2,7 @@
 from django.conf.urls import patterns, url
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
-from wakkerdam.views import all_games, make_game, make_game_submit, show_game, game_not_found, join_game, info, \
+from wakkerdam.start_views import all_games, make_game, make_game_submit, show_game, game_not_found, join_game, info, \
 	start_game, leave_game, start_phase_two
 from game_views import play_night, play_day
 
