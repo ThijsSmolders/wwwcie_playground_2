@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from start_views import all_games, make_game, make_game_submit, show_game, game_not_found, join_game, info, \
 	start_game, leave_game, start_phase_two
-from game_views import play_night, play_day
+from game_views import play_night, play_day, wait_for_votes
 
 
 urlpatterns = patterns('',
@@ -21,6 +21,7 @@ urlpatterns = patterns('',
 	url(r'start_phase_two/$', start_phase_two, name = 'wakkerdam_start_phase_two'),
 	url(r'night/$', play_night, name = 'wakkerdam_night'),
 	url(r'day/$', play_day, name = 'wakkerdam_day'),
+	url(r'wait/', wait_for_votes, name='wakkerdam_waiting_room'),
 )
 
 
