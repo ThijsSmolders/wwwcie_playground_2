@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm, Form
 from wakkerdam.models import Game, Player
+from models import LynchVote
 
 
 class CreateGameForm(ModelForm):
@@ -22,3 +23,10 @@ class JoinPlayerForm(ModelForm):
 
 class NumberOfWolvesForm(Form):
 	nr = forms.IntegerField(help_text='Aantal weerwolven in het spel')
+
+class VotingFormDay(ModelForm):
+	class Meta:
+		""" We want this form to change a Game """
+		model = LynchVote
+		""" We only want the name field to be changed """
+		fields = ['votee',]
