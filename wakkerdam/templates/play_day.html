@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends 'layout.html' %}
 
-</body>
-</html>
+{% block content %}
+
+<form action="{% url 'wakkerdam_day' %}?id={{game.id}}" method="POST">
+	{{ form.as_p }}
+	{% csrf_token %} {# this should be in every POST form for security reasons #}
+	<input type="submit" value="Choose!" />
+</form>
+
+{% endblock content %}
