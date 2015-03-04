@@ -28,6 +28,7 @@ def play_day(request):
 			vote.voter = player[0]
 			vote.round = game.round
 			form.save()
+			# TODO Kijken of alle votes binnen zijn, zoja, finish de waiting room voor alle spelers
 		else:
 			return render(request, 'play_day.html', {
 				'form': form,
@@ -39,6 +40,8 @@ def play_day(request):
 
 def wait_for_votes(request):
 	return render(request, 'waiting_room.html')
+# TODO Waiting room opsplitsen voor dag en nacht versie
+# TODO Doorsturen naar you're alive en you're dead pagina's
 
 def play_night(request):
 
