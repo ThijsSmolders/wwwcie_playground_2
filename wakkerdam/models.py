@@ -27,7 +27,7 @@ class Player(models.Model):
 	name = models.CharField(max_length=32)
 	role = models.CharField(max_length = 10, choices = (
 		(CIV, 'Ordinary citizen'),
-		(WOLF, 'Hungry mothafucker'),
+		(WOLF, 'Hungry mothafucka'),
 	), blank = True, null = True, default = CIV)
 	game = models.ForeignKey(Game, related_name = 'players')
 	alive = models.BooleanField(default = True)

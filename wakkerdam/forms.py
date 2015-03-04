@@ -21,4 +21,4 @@ class JoinPlayerForm(ModelForm):
 		fields = ['name',]
 
 class NumberOfWolvesForm(Form):
-	nr = forms.IntegerField()
+	nr = forms.IntegerField(help_text='Aantal weerwolven in het spel')
