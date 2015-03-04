@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from wakkerdam.views import all_games, make_game, make_game_submit, show_game, game_not_found, join_game, info, \
 	start_game, leave_game, start_phase_two
+from game_views import play_night, play_day
 
 
 urlpatterns = patterns('',
@@ -18,7 +19,8 @@ urlpatterns = patterns('',
 	url(r'start_game/$', start_game, name = 'wakkerdam_start_game'),
 	url(r'leave_game/$', leave_game, name = 'wakkerdam_leave_game'),
 	url(r'start_phase_two/$', start_phase_two, name = 'wakkerdam_start_phase_two'),
-	url(r'night/$', lambda req: HttpResponse('het is nacht! ga slapen! doei!'), name = 'wakkerdam_night')
+	url(r'night/$', play_night, name = 'wakkerdam_night'),
+	url(r'day/$', play_day, name = 'wakkerdam_day'),
 )
 
 
