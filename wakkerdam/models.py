@@ -40,6 +40,6 @@ class Player(models.Model):
 		unique_together = ('game', 'user')
 
 	def __unicode__(self):
-		return self.name
+		return '%s (%s)' % (self.name,self.game)
 
 

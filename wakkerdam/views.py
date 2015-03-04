@@ -146,8 +146,9 @@ def start_phase_two(request):
 		if 0 < form.cleaned_data['nr'] < game.players.all().count():
 			wolves = sample(game.players.all(), form.cleaned_data['nr'])
 			for wolf in wolves:
-				wolf.state = Player.WOLF
+				wolf.role = Player.WOLF
 				wolf.save()
+				print wolf
 			game.state = 'night'
 			game.save()
 			return redirect(to = '%s?id=%d' % (reverse('wakkerdam_night'), game.id))
