@@ -159,7 +159,7 @@ def start_phase_two(request):
 			game.state = 'night'
 			game.save()
 			return redirect(to = '%s?id=%d' % (reverse('wakkerdam_night'), game.id))
-	return HttpResponse('Je bent een sukkeltje, volgende keer beter. Peters moeder troost je wel (tenzij je Thijs bent)! (Het aantal wolven is niet acceptabel icm het aantal spelers %s.)' %game.players.all().count())
+	return HttpResponse('Je bent een sukkeltje, volgende keer beter. Peters moeder troost je wel (tenzij je Thijs bent, dan be je gewoon een sukkel)! (Het aantal wolven is niet acceptabel icm het aantal spelers %s.)' %game.players.all().count())
 
 
 def info(request):

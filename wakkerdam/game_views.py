@@ -1,6 +1,7 @@
-from django.core.urlresolvers import reverse
-from django.http import request
-from django.shortcuts import redirect, render
+from django.shortcuts import render
+from audioop import reverse
+from django.http import HttpResponse
+from django.shortcuts import redirect
 from forms import VotingFormDay
 from models import Game, Player
 
@@ -27,7 +28,9 @@ def wait_for_votes(request):
 	return render(request, 'waiting_room.html')
 
 def play_night(request):
+
 	""" Thijs is een motherfucker """
+	""" wopwopwop """
 
 	try:
 		id = int(request.GET['id'])
@@ -36,4 +39,14 @@ def play_night(request):
 		return redirect(to = '%s' % reverse('wakkerdam_game_not_found'))
 	print Player.objects.filter(game = game, role = Player.WOLF)
 
+	if Game.state == 'night'
+		"""De weerwolven gaan stemmen"""
+		player = Player.objects.filter(game = game, role = Player.WOLF, user = request.user)
+		if len(player) == 1
+			if player[0].alive:
+
+			else:
+				return HttpResponse('Noob, je bent dood.')
+		else:
+			return HttpResponse('Je mag niet stemmen deze nacht. Alleen de coole wolven zijn uitgenodigd.')
 

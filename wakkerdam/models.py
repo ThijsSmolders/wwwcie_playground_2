@@ -49,3 +49,9 @@ class LynchVote(models.Model):
 	votee = models.ForeignKey(Player, related_name = 'Votees')
 	round = models.IntegerField(default=1)
 
+class Wolfvote(models.Model):
+	game = models.ForeignKey(Game, related_name = 'WolfVotes')
+	voter = models.ForeignKey(Player, related_name = 'Wolfvoters')
+	votee = models.ForeignKey(Player, related_name = 'Wolfvotees')
+	round = models.IntegerField(default=1)
+
