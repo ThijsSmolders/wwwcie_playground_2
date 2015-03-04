@@ -17,6 +17,7 @@ class Game(models.Model):
 	), default = 'join')
 	started = models.DateTimeField(auto_now_add = True)
 	initiator = models.ForeignKey(AUTH_USER_MODEL)
+	round = models.IntegerField(default=1)
 	def __unicode__(self):
 		return self.name
 
@@ -42,4 +43,9 @@ class Player(models.Model):
 	def __unicode__(self):
 		return '%s (%s)' % (self.name,self.game)
 
+class LynchVote(models.Model):
+	game = models.ForeignKey(Game, related_name = 'LynchVotes')
+	voter = models.ForeignKey(Player, related_name = 'Voters')
+	votee = models.ForeignKey(Player, related_name = 'Votees')
+	round = models.IntegerField(default=1)
 

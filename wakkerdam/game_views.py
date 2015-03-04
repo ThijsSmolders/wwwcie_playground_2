@@ -1,10 +1,23 @@
-from django.core.urlresolvers import reverse
+
+from audioop import reverse
 from django.shortcuts import redirect
-from wakkerdam.models import Game, Player
+from forms import VotingFormDay
+from models import Game, Player
 
 
 def play_day(request):
-	pass
+	try:
+		id = int(request.GET['id'])
+		game = Game.objects.get(id = id)
+	except (KeyError, ValueError, Game.DoesNotExist), e: # if no id or not a valid id or no such game
+		return redirect(to = '%s' % reverse('wakkerdam_game_not_found'))
+	if game.state=='day':
+		form = VotingFormDay(data = request.POST)
+		if form.is_valid():
+			game.state = 'night'
+			game.save()
+	return redirect(to = '%s?id=%d' % (reverse('wakkerdam_night'), game.id))
+
 def play_night(request):
 	""" Thijs is een motherfucker """
 
@@ -16,14 +29,3 @@ def play_night(request):
 	print Player.objects.filter(game = game, role = Player.WOLF)
 
 
-"""					request.user==game.initiator:
-		game.state='start'
-		game.save()
-		form = NumberOfWolvesForm(data = None, initial={'nr':number_of_wolves(game.players.all().count())})
-		return render(request, 'start_game.html', {
-		'form': form,
-		'game': game,
-		})
-
-	else:
-		return redirect(to = '%s?id=%d' % (reverse('wakkerdam_game'), game.id)) """
